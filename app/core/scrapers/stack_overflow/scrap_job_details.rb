@@ -3,6 +3,7 @@ module Scrapers
     class ScrapJobDetails
       ScrapedJobDetails = Struct.new(
         :id,
+        :title,
         :salary,
         :company,
         :benefits,
@@ -16,6 +17,7 @@ module Scrapers
       def call
         ScrapedJobDetails.new(
           id: rss_feed_item.id,
+          title: title,
           salary: salary,
           company: company,
           benefits: benefits,
@@ -49,6 +51,13 @@ module Scrapers
 
       def benefits
         document.css('.-benefits')
+                .first
+                &.content
+                &.strip
+      end
+
+      def title
+        document.css('.fs-headline1')
                 .first
                 &.content
                 &.strip

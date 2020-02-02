@@ -1,6 +1,8 @@
 class JobPost < ApplicationRecord
   has_many :job_post_skills
   has_many :skills, through: :job_post_skills
+
+  # TODO(kacper): add salary, company and benefits fields
 end
 
 # == Schema Information
