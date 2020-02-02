@@ -3,3 +3,9 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Layout/LineLength:
+  Max: 100
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma

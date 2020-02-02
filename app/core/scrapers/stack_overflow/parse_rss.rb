@@ -2,18 +2,23 @@ require 'rss'
 
 module Scrapers
   module StackOverflow
-    class FetchLinks
-      LinkItem = Struct.new(:id, :link, keyword_init: true)
-
-      def initialize(last_parsed_id)
-        @last_parsed_id = last_parsed_id.to_s
-      end
+    class ParseRss
+      FeedItem = Struct.new(:id, :link, :description, :categories, keyword_init: true)
 
       RSS_FEED_URL = 'https://stackoverflow.com/jobs/feed?r=true'.freeze
 
+      def initialize(last_parsed_id:)
+        @last_parsed_id = last_parsed_id.to_s
+      end
+
       def call
         items.map do |item|
-          LinkItem.new(id: item.guid.content, link: item.link)
+          FeedItem.new(
+            id: item.guid.content,
+            link: item.link,
+            description: item.description,
+            categories: item.categories.map(&:content),
+          )
         end
       end
 
