@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_01_202555) do
+ActiveRecord::Schema.define(version: 2020_02_02_175606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "job_post_skills", force: :cascade do |t|
+    t.bigint "skill_id"
+    t.bigint "job_post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_post_id"], name: "index_job_post_skills_on_job_post_id"
+    t.index ["skill_id"], name: "index_job_post_skills_on_skill_id"
+  end
 
   create_table "job_posts", force: :cascade do |t|
     t.string "title"
@@ -22,6 +31,13 @@ ActiveRecord::Schema.define(version: 2020_02_01_202555) do
     t.string "origin_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true
   end
 
 end
