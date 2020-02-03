@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_185907) do
+ActiveRecord::Schema.define(version: 2020_02_03_190338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_02_03_185907) do
     t.datetime "publication_datetime"
     t.string "link"
     t.text "benefits"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_job_posts_on_company_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -49,4 +51,5 @@ ActiveRecord::Schema.define(version: 2020_02_03_185907) do
     t.index ["name"], name: "index_skills_on_name", unique: true
   end
 
+  add_foreign_key "job_posts", "companies"
 end
