@@ -3,6 +3,8 @@ class JobPost < ApplicationRecord
   has_many :skills, through: :job_post_skills
 
   belongs_to :company, optional: true
+
+  validates :title, presence: true
 end
 
 # == Schema Information

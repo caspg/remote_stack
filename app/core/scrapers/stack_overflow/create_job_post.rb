@@ -28,6 +28,7 @@ module Scrapers
         @job_post ||= JobPost.create!(job_post_params)
       end
 
+      # rubocop:disable Metrics/AbcSize
       def job_post_params
         {
           origin_id: rss_feed_item.id,
@@ -37,7 +38,15 @@ module Scrapers
           description: rss_feed_item.description,
           publication_datetime: rss_feed_item.publication_datetime,
           link: rss_feed_item.link,
+          company: company,
         }
+      end
+      # rubocop:enable Metrics/AbcSize
+
+      def company
+        return nil if scraped_job_details.company.nil?
+
+        ::Companies::FindOrCreateCompany.new(company_name: scraped_job_details.company).call
       end
     end
   end
