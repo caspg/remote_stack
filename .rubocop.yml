@@ -9,3 +9,6 @@ Layout/LineLength:
 
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
