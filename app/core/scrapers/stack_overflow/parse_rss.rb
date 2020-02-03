@@ -6,6 +6,7 @@ module Scrapers
       FeedItem = Struct.new(
         :id,
         :title,
+        :publication_datetime,
         :link,
         :description,
         :categories,
@@ -26,6 +27,7 @@ module Scrapers
             link: item.link,
             description: item.description,
             categories: item.categories.map(&:content),
+            publication_datetime: item.pubDate.to_datetime,
           )
         end
       end
