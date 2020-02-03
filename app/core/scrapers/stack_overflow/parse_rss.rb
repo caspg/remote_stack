@@ -5,8 +5,8 @@ module Scrapers
     class ParseRss
       RSS_FEED_URL = 'https://stackoverflow.com/jobs/feed?r=true'.freeze
 
-      def initialize(last_parsed_id:)
-        @last_parsed_id = last_parsed_id.to_s
+      def initialize(last_origin_id:)
+        @last_origin_id = last_origin_id.to_s
       end
 
       def call
@@ -24,11 +24,11 @@ module Scrapers
 
       private
 
-      attr_reader :last_parsed_id
+      attr_reader :last_origin_id
 
       def items
         sorted_items.take_while do |item|
-          item.guid.content.to_s != last_parsed_id
+          item.guid.content.to_s != last_origin_id
         end
       end
 
