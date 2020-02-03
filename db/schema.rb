@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_183442) do
+ActiveRecord::Schema.define(version: 2020_02_03_185907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "slug", null: false
+    t.index ["slug"], name: "index_companies_on_slug", unique: true
+  end
 
   create_table "job_post_skills", force: :cascade do |t|
     t.bigint "skill_id"
