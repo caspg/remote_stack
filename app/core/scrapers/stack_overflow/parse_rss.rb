@@ -3,16 +3,6 @@ require 'rss'
 module Scrapers
   module StackOverflow
     class ParseRss
-      FeedItem = Struct.new(
-        :id,
-        :title,
-        :publication_datetime,
-        :link,
-        :description,
-        :categories,
-        keyword_init: true,
-      )
-
       RSS_FEED_URL = 'https://stackoverflow.com/jobs/feed?r=true'.freeze
 
       def initialize(last_parsed_id:)
@@ -21,7 +11,7 @@ module Scrapers
 
       def call
         items.map do |item|
-          FeedItem.new(
+          ::Scrapers::RssFeedItem.new(
             id: item.guid.content,
             title: item.title,
             link: item.link,

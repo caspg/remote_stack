@@ -1,21 +1,12 @@
 module Scrapers
   module StackOverflow
     class ScrapJobDetails
-      ScrapedJobDetails = Struct.new(
-        :id,
-        :title,
-        :salary,
-        :company,
-        :benefits,
-        keyword_init: true,
-      )
-
       def initialize(rss_feed_item:)
         @rss_feed_item = rss_feed_item
       end
 
       def call
-        ScrapedJobDetails.new(
+        ::Scrapers::ScrapedJobDetails.new(
           id: rss_feed_item.id,
           title: title,
           salary: salary,

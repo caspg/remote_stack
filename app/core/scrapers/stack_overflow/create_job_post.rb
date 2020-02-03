@@ -25,14 +25,19 @@ module Scrapers
       end
 
       def job_post
-        @job_post ||= begin
-          JobPost.create!(
-            origin_name: ORIGIN_NAME,
-            origin_id: rss_feed_item.id,
-            title: scraped_job_details.title || rss_feed_item.title,
-            description: rss_feed_item.description,
-          )
-        end
+        @job_post ||= JobPost.create!(job_post_params)
+      end
+
+      def job_post_params
+        {
+          origin_id: rss_feed_item.id,
+          origin_name: ORIGIN_NAME,
+          benefits: scraped_job_details.benefits,
+          title: scraped_job_details.title || rss_feed_item.title,
+          description: rss_feed_item.description,
+          publication_datetime: rss_feed_item.publication_datetime,
+          link: rss_feed_item.link,
+        }
       end
     end
   end
