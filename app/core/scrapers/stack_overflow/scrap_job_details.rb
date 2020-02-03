@@ -6,7 +6,7 @@ module Scrapers
       end
 
       def call
-        ::Scrapers::ScrapedJobDetails.new(
+        ::Scrapers::ScrappedJobDetails.new(
           id: rss_feed_item.id,
           title: title,
           salary: salary,

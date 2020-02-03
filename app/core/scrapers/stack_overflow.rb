@@ -21,6 +21,7 @@ module Scrapers
       end
 
       def scrap_job_details(rss_feed_item)
+        # don't spam
         sleep(1)
 
         ::Scrapers::StackOverflow::ScrapJobDetails.new(rss_feed_item: rss_feed_item).call

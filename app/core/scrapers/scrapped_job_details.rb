@@ -1,5 +1,5 @@
 module Scrapers
-  ScrapedJobDetails = Struct.new(
+  ScrappedJobDetails = Struct.new(
     :id,
     :title,
     :salary,
