@@ -1,5 +1,5 @@
 module Scrapers
-  class ScrapAndCreateJobPosts
+  class ScrapRssAndCreateJobPosts
     def initialize(last_origin_id:, rss_parser:, origin_name:, job_details_scraper:)
       @last_origin_id = last_origin_id
       @rss_parser = rss_parser

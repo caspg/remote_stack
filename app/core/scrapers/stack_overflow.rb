@@ -4,7 +4,7 @@ module Scrapers
 
     class << self
       def scrap_and_create_job_posts(last_origin_id:)
-        ::Scrapers::ScrapAndCreateJobPosts.new(
+        ::Scrapers::ScrapRssAndCreateJobPosts.new(
           last_origin_id: last_origin_id,
           origin_name: ORIGIN_NAME,
           rss_parser: ::Scrapers::StackOverflow::ParseRss,
