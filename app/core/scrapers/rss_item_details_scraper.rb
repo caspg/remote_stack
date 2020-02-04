@@ -1,5 +1,5 @@
 module Scrapers
-  class JobDetailsScraper
+  class RssItemDetailsScraper
     def initialize(rss_feed_item:)
       @rss_feed_item = rss_feed_item
     end

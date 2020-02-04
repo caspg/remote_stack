@@ -1,6 +1,6 @@
 module Scrapers
   module StackOverflow
-    class ScrapJobDetails < ::Scrapers::JobDetailsScraper
+    class ScrapJobDetails < ::Scrapers::RssItemDetailsScraper
       def initialize(rss_feed_item:)
         super(rss_feed_item: rss_feed_item)
       end

@@ -6,7 +6,7 @@ module Scrapers
 
     def call
       items.map do |item|
-        ::Scrapers::RssFeedItem.new(
+        ::Scrapers::RssItem.new(
           id: item_id(item),
           title: item.title,
           link: item.link,

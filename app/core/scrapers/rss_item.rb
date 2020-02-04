@@ -1,5 +1,5 @@
 module Scrapers
-  RssFeedItem = Struct.new(
+  RssItem = Struct.new(
     :id,
     :title,
     :publication_datetime,
