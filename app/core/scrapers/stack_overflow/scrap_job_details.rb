@@ -1,8 +1,8 @@
 module Scrapers
   module StackOverflow
-    class ScrapJobDetails
+    class ScrapJobDetails < ::Scrapers::JobDetailsScraper
       def initialize(rss_feed_item:)
-        @rss_feed_item = rss_feed_item
+        super(rss_feed_item: rss_feed_item)
       end
 
       def call
@@ -17,14 +17,11 @@ module Scrapers
 
       private
 
-      attr_reader :rss_feed_item
-
-      def document
-        @document ||= begin
-          # TODO(kacper): maybe check if returns 200
-          raw_document = Net::HTTP.get(URI(rss_feed_item.link))
-          Nokogiri::HTML(raw_document)
-        end
+      def title
+        document.css('.fs-headline1')
+                .first
+                &.content
+                &.strip
       end
 
       def salary
@@ -42,13 +39,6 @@ module Scrapers
 
       def benefits
         document.css('.-benefits')
-                .first
-                &.content
-                &.strip
-      end
-
-      def title
-        document.css('.fs-headline1')
                 .first
                 &.content
                 &.strip
