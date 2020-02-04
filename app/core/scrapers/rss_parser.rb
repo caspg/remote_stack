@@ -27,7 +27,7 @@ module Scrapers
 
     def items
       sorted_items.take_while do |item|
-        item.guid.content.to_s != last_guid
+        item_id(item).to_s != last_guid
       end
     end
 
