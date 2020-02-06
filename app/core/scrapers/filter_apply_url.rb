@@ -5,16 +5,17 @@ module Scrapers
   #
   # If given link redirects to that boards, it returns nil,
   # otherwise it returns link to `apply` website.
-  class FilterApplyLink
+  class FilterApplyUrl
     IGNORED_HOSTNAMES = %w[
       stackoverflow.com
     ].freeze
 
-    def initialize(apply_link:)
-      @apply_link = apply_link
+    def initialize(apply_url:)
+      @apply_url = apply_url
     end
 
     def call
+      return nil if apply_url.nil?
       return nil if ignored_hostname?
 
       last_request_uri.to_s
@@ -22,7 +23,7 @@ module Scrapers
 
     private
 
-    attr_reader :apply_link
+    attr_reader :apply_url
 
     def ignored_hostname?
       IGNORED_HOSTNAMES.include?(last_request_uri.hostname)
@@ -33,7 +34,7 @@ module Scrapers
     end
 
     def response
-      HTTParty.get(apply_link, follow_redirects: true)
+      HTTParty.get(apply_url, follow_redirects: true)
     end
   end
 end
