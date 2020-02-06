@@ -1,9 +1,8 @@
 module Scrapers
   module RemotiveIo
     class ScrapJobsLinks
-      JobLink = Struct.new(:id, :link, keyword_init: true)
+      JobLink = Struct.new(:id, :url, keyword_init: true)
 
-      BASE_HOST = 'remotive.io'.freeze
       LIST_URL = 'https://remotive.io/remote-jobs/software-dev'.freeze
 
       def call
@@ -12,7 +11,7 @@ module Scrapers
 
           JobLink.new(
             id: extract_job_id(path),
-            link: build_link(path),
+            url: build_url(path),
           )
         end
       end
@@ -23,13 +22,13 @@ module Scrapers
         document.xpath(
           '//li[contains(@class, "job-list-item")' \
           'and not(contains(@class, "job-list-dont-open"))]',
-        ).take(5)
+        ).take_while.with_index do |_, index|
+          index < 5
+        end
       end
 
       def document
-        # TODO(kacper): maybe check if returns 200
-        raw_document = HTTParty.get(LIST_URL)
-        Nokogiri::HTML(raw_document.body)
+        @document ||= ::Scrapers::BaseScraper.new(LIST_URL)
       end
 
       def extract_path(job_list_item)
@@ -40,8 +39,8 @@ module Scrapers
         path.split('-').last
       end
 
-      def build_link(path)
-        URI::HTTPS.build(host: BASE_HOST, path: path).to_s
+      def build_url(path)
+        ::Scrapers::RemotiveIo.build_url(path)
       end
     end
   end
