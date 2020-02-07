@@ -1,7 +1,7 @@
 module Skills
   class FindOrCreateSkills
     def initialize(skill_names:)
-      @skill_names = skill_names
+      @skill_names = skill_names.downcase
     end
 
     def call
