@@ -1,7 +1,7 @@
 module Scrapers
   module RemotiveIo
     class ScrapJobsLinks
-      JobLink = Struct.new(:id, :url, keyword_init: true)
+      JobLink = Struct.new(:id, :url, :publication_datetime, keyword_init: true)
 
       LIST_URL = 'https://remotive.io/remote-jobs/software-dev'.freeze
 
@@ -12,6 +12,7 @@ module Scrapers
           JobLink.new(
             id: extract_job_id(path),
             url: build_url(path),
+            publication_datetime: extract_publication(job_list_item),
           )
         end
       end
@@ -41,6 +42,12 @@ module Scrapers
 
       def build_url(path)
         ::Scrapers::RemotiveIo.build_url(path)
+      end
+
+      def extract_publication_datetime(job_list_item)
+        ::DateHelpers::ReverseWordsToDatetime.new(
+          job_list_item.css('.job-date').first.text.strip,
+        ).call
       end
     end
   end
