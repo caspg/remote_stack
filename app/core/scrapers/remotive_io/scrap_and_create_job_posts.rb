@@ -1,8 +1,9 @@
 module Scrapers
   module RemotiveIo
     class ScrapAndCreateJobPosts
-      def initialize(last_origin_id:)
+      def initialize(last_origin_id:, job_origin_id:)
         @last_origin_id = last_origin_id
+        @job_origin_id = job_origin_id
       end
 
       def call
@@ -14,7 +15,7 @@ module Scrapers
 
       private
 
-      attr_reader :last_origin_id
+      attr_reader :last_origin_id, :job_origin_id
 
       def job_links
         ::Scrapers::RemotiveIo::ScrapJobsLinks.new(last_origin_id: last_origin_id).call
@@ -23,7 +24,11 @@ module Scrapers
       def scrap_job_details(job_link)
         # don't spam
         sleep(1)
-        ::Scrapers::RemotiveIo::ScrapJobDetails.new(job_link: job_link).call
+
+        ::Scrapers::RemotiveIo::ScrapJobDetails.new(
+          job_link: job_link,
+          job_origin_id: job_origin_id,
+        ).call
       end
 
       def create_job_post(job_details)

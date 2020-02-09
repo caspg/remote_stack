@@ -1,7 +1,6 @@
 module Scrapers
   module RemotiveIo
     BASE_HOST = 'remotive.io'.freeze
-    ORIGIN_NAME = 'RemotiveIo'.freeze
 
     class << self
       def build_url(path)
@@ -11,7 +10,14 @@ module Scrapers
       end
 
       def scrap_and_create_job_posts(last_origin_id:)
-        ::Scrapers::RemotiveIo::ScrapAndCreateJobPosts.new(last_origin_id: last_origin_id).call
+        ::Scrapers::RemotiveIo::ScrapAndCreateJobPosts.new(
+          last_origin_id: last_origin_id,
+          job_origin_id: job_origin_id,
+        ).call
+      end
+
+      def job_origin_id
+        JobOrigin.find_by(name: JobOrigin::REMOTEIVE_IO).id
       end
     end
   end

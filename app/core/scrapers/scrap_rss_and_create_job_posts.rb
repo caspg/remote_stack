@@ -1,9 +1,9 @@
 module Scrapers
   class ScrapRssAndCreateJobPosts
-    def initialize(last_origin_id:, rss_parser:, origin_name:, job_details_scraper:)
+    def initialize(last_origin_id:, rss_parser:, job_origin_id:, job_details_scraper:)
       @last_origin_id = last_origin_id
       @rss_parser = rss_parser
-      @origin_name = origin_name
+      @job_origin_id = job_origin_id
       @job_details_scraper = job_details_scraper
     end
 
@@ -15,7 +15,7 @@ module Scrapers
 
     private
 
-    attr_reader :last_origin_id, :rss_parser, :origin_name, :job_details_scraper
+    attr_reader :last_origin_id, :rss_parser, :job_origin_id, :job_details_scraper
 
     def parse_rss_feed_items
       rss_parser.new(last_origin_id: last_origin_id).call
@@ -40,7 +40,7 @@ module Scrapers
     def normalize_job_details(rss_feed_item, scraped_job_details)
       ::Scrapers::ScrappedJobDetails.new(
         id: rss_feed_item.id,
-        origin_name: origin_name,
+        job_origin_id: job_origin_id,
         title: scraped_job_details.title || rss_feed_item.title,
         company_name: scraped_job_details.company_name,
         benefits: scraped_job_details.benefits,

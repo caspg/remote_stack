@@ -1,8 +1,9 @@
 module Scrapers
   module RemotiveIo
     class ScrapJobDetails
-      def initialize(job_link:)
+      def initialize(job_link:, job_origin_id:)
         @job_link = job_link
+        @job_origin_id = job_origin_id
       end
 
       # rubocop:disable Metrics/MethodLength
@@ -12,7 +13,7 @@ module Scrapers
         ::Scrapers::ScrappedJobDetails.new(
           id: job_link.id,
           title: title,
-          origin_name: ::Scrapers::RemotiveIo::ORIGIN_NAME,
+          job_origin_id: job_origin_id,
           company_name: company_name,
           apply_url: filtered_apply_url,
           publication_datetime: job_link.publication_datetime || DateTime.now,
@@ -24,7 +25,7 @@ module Scrapers
 
       private
 
-      attr_reader :job_link
+      attr_reader :job_link, :job_origin_id
 
       def filtered_apply_url
         @filtered_apply_url ||=

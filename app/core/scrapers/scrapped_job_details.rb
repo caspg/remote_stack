@@ -1,7 +1,7 @@
 module Scrapers
   ScrappedJobDetails = Struct.new(
     :id,
-    :origin_name,
+    :job_origin_id,
     :title,
     :salary,
     :company_name,
