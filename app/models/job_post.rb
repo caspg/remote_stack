@@ -6,8 +6,6 @@ class JobPost < ApplicationRecord
 
   validates :title, presence: true
   validates :apply_url, presence: true
-
-  # TODO: add salary field
 end
 
 # == Schema Information
@@ -20,6 +18,7 @@ end
 #  description          :text
 #  origin_name          :string
 #  publication_datetime :datetime
+#  salary               :string
 #  title                :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
