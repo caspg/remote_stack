@@ -1,0 +1,23 @@
+<li class="bg-white container mx-auto mb-2 p-4 border rounded cursor-pointer">
+  <div class="flex flex-col">
+    <h2 class="font-semibold mb-1 hover:underline">
+      <%= job_post.title %>
+    </h2>
+
+    <p>
+      <%= job_post.company.name %>
+    </p>
+
+    <div class="mt-2">
+      <% job_post.skills.each do |skill| %>
+        <div class="inline-block border border-blue-400 mr-2 mb-2 rounded-sm bg-blue-100 text-xs text-blue-900 p-1">
+          <%= skill.name %>
+        </div>
+      <% end %>
+    </div>
+
+    <p class="text-xs mt-2 self-end">
+      <%= time_ago_in_words(job_post.publication_datetime) %>
+    </p>
+  </div>
+</li>
