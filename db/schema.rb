@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_170943) do
+ActiveRecord::Schema.define(version: 2020_02_09_172511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(version: 2020_02_09_170943) do
     t.index ["slug"], name: "index_companies_on_slug", unique: true
   end
 
+  create_table "job_origins", force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_job_origins_on_name", unique: true
+  end
+
   create_table "job_post_skills", force: :cascade do |t|
     t.bigint "skill_id"
     t.bigint "job_post_id"
@@ -68,7 +73,9 @@ ActiveRecord::Schema.define(version: 2020_02_09_170943) do
     t.text "benefits"
     t.bigint "company_id"
     t.string "salary"
+    t.bigint "job_origin_id"
     t.index ["company_id"], name: "index_job_posts_on_company_id"
+    t.index ["job_origin_id"], name: "index_job_posts_on_job_origin_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -79,4 +86,5 @@ ActiveRecord::Schema.define(version: 2020_02_09_170943) do
   end
 
   add_foreign_key "job_posts", "companies"
+  add_foreign_key "job_posts", "job_origins"
 end
