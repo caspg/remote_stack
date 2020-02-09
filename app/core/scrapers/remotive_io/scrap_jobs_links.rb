@@ -5,7 +5,20 @@ module Scrapers
 
       LIST_URL = 'https://remotive.io/remote-jobs/software-dev'.freeze
 
+      def initialize(last_origin_id:)
+        @last_origin_id = last_origin_id
+      end
+
       def call
+        job_links
+          .take_while { |job_link| job_link.id != last_origin_id }
+      end
+
+      private
+
+      attr_reader :last_origin_id
+
+      def job_links
         job_list_items.map do |job_list_item|
           path = extract_path(job_list_item)
 
@@ -17,16 +30,11 @@ module Scrapers
         end
       end
 
-      private
-
       def job_list_items
         document.xpath(
           '//li[contains(@class, "job-list-item")' \
           'and not(contains(@class, "job-list-dont-open"))]',
-        ).take_while.with_index do |_, index|
-          index < 5
-        end
-        # TODO(kacper): ^^ remove that take_while and replace with "last_origin_id"
+        )
       end
 
       def document

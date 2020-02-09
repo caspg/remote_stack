@@ -7,6 +7,7 @@ class JobPost < ApplicationRecord
   validates :title, presence: true
 
   # TODO: add salary field
+  # TODO: change `link` to `apply_url`
 end
 
 # == Schema Information

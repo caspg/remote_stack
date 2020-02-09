@@ -10,8 +10,8 @@ module Scrapers
         URI::HTTPS.build(host: BASE_HOST, path: path).to_s
       end
 
-      def scrap_and_create_job_posts
-        ::Scrapers::RemotiveIo::ScrapAndCreateJobPosts.new.call
+      def scrap_and_create_job_posts(last_origin_id:)
+        ::Scrapers::RemotiveIo::ScrapAndCreateJobPosts.new(last_origin_id: last_origin_id).call
       end
     end
   end
