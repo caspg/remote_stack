@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: remote_stack_production
-  username: remote_stack
-  password: <%= ENV['REMOTE_STACK_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
