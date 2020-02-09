@@ -7,6 +7,18 @@ class JobPost < ApplicationRecord
 
   validates :title, presence: true
   validates :apply_url, presence: true
+
+  class << self
+    def most_recent
+      order('publication_datetime').last
+    end
+
+    def most_recent_for_origin(job_origin_name)
+      joins(:job_origin)
+        .where(job_origins: { name: job_origin_name })
+        .most_recent
+    end
+  end
 end
 
 # == Schema Information
