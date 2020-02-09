@@ -5,19 +5,23 @@ module Scrapers
         @job_link = job_link
       end
 
+      # rubocop:disable Metrics/MethodLength
       def call
         return nil if filtered_apply_link.nil?
 
         ::Scrapers::ScrappedJobDetails.new(
           id: job_link.id,
           title: title,
-          company: company,
-          apply_url: apply_url,
+          origin_id: job_link.id,
+          origin_name: ::Scrapers::RemotiveIo::ORIGIN_NAME,
+          company_name: company_name,
+          link: filtered_apply_link,
           publication_datetime: job_link.publication_datetime || DateTime.now,
           description: description,
           categories: categories,
         )
       end
+      # rubocop:enable Metrics/MethodLength
 
       private
 
@@ -44,7 +48,7 @@ module Scrapers
         document.css('.wrapper .content h1').first.text
       end
 
-      def company
+      def company_name
         document.css('.company').first.text
       end
 

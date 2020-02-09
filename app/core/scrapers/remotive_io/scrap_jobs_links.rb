@@ -12,7 +12,7 @@ module Scrapers
           JobLink.new(
             id: extract_job_id(path),
             url: build_url(path),
-            publication_datetime: extract_publication(job_list_item),
+            publication_datetime: extract_publication_datetime(job_list_item),
           )
         end
       end
@@ -26,6 +26,7 @@ module Scrapers
         ).take_while.with_index do |_, index|
           index < 5
         end
+        # TODO(kacper): ^^ remove that take_while and replace with "last_origin_id"
       end
 
       def document

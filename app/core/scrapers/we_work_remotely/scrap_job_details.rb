@@ -9,7 +9,7 @@ module Scrapers
         ::Scrapers::ScrappedJobDetails.new(
           id: rss_feed_item.id,
           title: title,
-          company: company,
+          company_name: company_name,
         )
       end
 
@@ -22,7 +22,7 @@ module Scrapers
                 &.strip
       end
 
-      def company
+      def company_name
         document.css('.company-card h2')
                 .first
                 &.content

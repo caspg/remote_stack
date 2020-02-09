@@ -1,9 +1,7 @@
 module Scrapers
   class CreateJobPost
-    def initialize(origin_name:, rss_feed_item:, scraped_job_details:)
-      @origin_name = origin_name
-      @rss_feed_item = rss_feed_item
-      @scraped_job_details = scraped_job_details
+    def initialize(job_details:)
+      @job_details = job_details
     end
 
     def call!
@@ -16,37 +14,29 @@ module Scrapers
 
     private
 
-    attr_reader :origin_name, :rss_feed_item, :scraped_job_details
+    attr_reader :job_details
 
     def skills
-      return [] if rss_feed_item.categories.blank?
+      return [] if job_details.categories.blank?
 
-      ::Skills::FindOrCreateSkills.new(skill_names: rss_feed_item.categories).call
+      ::Skills::FindOrCreateSkills.new(skill_names: job_details.categories).call
     end
 
     def job_post
       @job_post ||= JobPost.create!(job_post_params)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def job_post_params
-      {
-        origin_id: rss_feed_item.id,
-        origin_name: origin_name,
-        benefits: scraped_job_details.benefits,
-        title: scraped_job_details.title || rss_feed_item.title,
-        description: rss_feed_item.description,
-        publication_datetime: rss_feed_item.publication_datetime,
-        link: rss_feed_item.link,
-        company: company,
-      }
+      job_details
+        .to_h
+        .merge(company: company, origin_id: job_details.id)
+        .except(:company_name, :categories, :salary, :id)
     end
-    # rubocop:enable Metrics/AbcSize
 
     def company
-      return nil if scraped_job_details.company.nil?
+      return nil if job_details.company_name.nil?
 
-      ::Companies::FindOrCreateCompany.new(company_name: scraped_job_details.company).call
+      ::Companies::FindOrCreateCompany.new(company_name: job_details.company_name).call
     end
   end
 end

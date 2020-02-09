@@ -1,7 +1,7 @@
 module Skills
   class FindOrCreateSkills
     def initialize(skill_names:)
-      @skill_names = skill_names.downcase
+      @skill_names = normalize_skill_names(skill_names)
     end
 
     def call
@@ -22,10 +22,12 @@ module Skills
 
     def created_skills
       (skill_names - existing_skill_names).map do |skill_name|
-        puts "skill_name: #{skill_name}"
-
         Skill.create!(name: skill_name)
       end
+    end
+
+    def normalize_skill_names(skill_names)
+      skill_names.map(&:downcase).uniq
     end
   end
 end

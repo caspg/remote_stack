@@ -1,11 +1,12 @@
 module Scrapers
   ScrappedJobDetails = Struct.new(
     :id,
+    :origin_name,
     :title,
     :salary,
-    :company,
+    :company_name,
     :benefits,
-    :apply_url,
+    :link,
     :publication_datetime,
     :description,
     :categories,

@@ -3,6 +3,9 @@ class Skill < ApplicationRecord
   has_many :job_posts, through: :job_post_skills
 
   validates :name, presence: true
+
+  # TODO: somehow handle skill name normalization.
+  # smth like with company name?
 end
 
 # == Schema Information
