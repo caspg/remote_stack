@@ -6,8 +6,7 @@ module Scrapers
     :salary,
     :company_name,
     :benefits,
-    # TODO: change `link` to `apply_url`
-    :link,
+    :apply_url,
     :publication_datetime,
     :description,
     :categories,

@@ -44,8 +44,7 @@ module Scrapers
         title: scraped_job_details.title || rss_feed_item.title,
         company_name: scraped_job_details.company_name,
         benefits: scraped_job_details.benefits,
-        # TODO: what should be the name? apply url or link?
-        link: rss_feed_item.link,
+        apply_url: rss_feed_item.link,
         publication_datetime: rss_feed_item.publication_datetime,
         description: rss_feed_item.description,
         categories: rss_feed_item.categories,

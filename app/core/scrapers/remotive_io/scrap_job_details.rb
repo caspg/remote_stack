@@ -7,14 +7,14 @@ module Scrapers
 
       # rubocop:disable Metrics/MethodLength
       def call
-        return nil if filtered_apply_link.nil?
+        return nil if filtered_apply_url.nil?
 
         ::Scrapers::ScrappedJobDetails.new(
           id: job_link.id,
           title: title,
           origin_name: ::Scrapers::RemotiveIo::ORIGIN_NAME,
           company_name: company_name,
-          link: filtered_apply_link,
+          apply_url: filtered_apply_url,
           publication_datetime: job_link.publication_datetime || DateTime.now,
           description: description,
           categories: categories,
@@ -26,8 +26,8 @@ module Scrapers
 
       attr_reader :job_link
 
-      def filtered_apply_link
-        @filtered_apply_link ||=
+      def filtered_apply_url
+        @filtered_apply_url ||=
           ::Scrapers::FilterApplyUrl.new(apply_url: apply_url).call
       end
 
