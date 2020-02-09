@@ -10,13 +10,14 @@
 
     <div class="mt-2">
       <% job_post.skills.each do |skill| %>
-        <div class="inline-block border border-blue-400 mr-2 mb-2 rounded-sm bg-blue-100 text-xs text-blue-900 p-1">
+        <div class="inline-block border border-blue-400 mr-2 mb-2 rounded bg-blue-100 text-xs text-blue-900 p-1">
           <%= skill.name %>
         </div>
       <% end %>
     </div>
 
-    <p class="text-xs mt-2 self-end">
+    <p class="flex text-xs mt-1 self-end">
+      <%= image_tag('icons/time.svg', class: 'opacity-75 w-4 mr-2') %>
       <%= time_ago_in_words(job_post.publication_datetime) %>
     </p>
   </div>
