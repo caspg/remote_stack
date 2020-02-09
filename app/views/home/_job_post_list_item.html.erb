@@ -4,9 +4,11 @@
       <%= job_post.title %>
     </h2>
 
-    <p>
-      <%= job_post.company.name %>
-    </p>
+    <% if job_post.company.present? %>
+      <p>
+        <%= job_post.company.name %>
+      </p>
+    <% end %>
 
     <div class="mt-2">
       <% job_post.skills.each do |skill| %>
