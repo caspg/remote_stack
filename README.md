@@ -11,3 +11,9 @@
 [] scrap jobs from remoteok.io (but make sure that filter out jobs from other boards)
 
 [] try to extract tags from description and title (NLP?)
+
+## Deployment
+
+```bash
+git push heroku master
+```
