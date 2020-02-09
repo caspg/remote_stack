@@ -1,13 +1,11 @@
 class HomeController < ApplicationController
   def index
-    @job_posts = home_page_job_posts
+    @job_posts = job_posts_feed
   end
 
   private
 
-  def home_page_job_posts
-    JobPost
-      .where('publication_datetime > ?', 30.days.ago)
-      .order(publication_datetime: :desc)
+  def job_posts_feed
+    ::JobPosts::FindJobPostsFeed.call
   end
 end
