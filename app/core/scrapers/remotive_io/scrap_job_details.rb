@@ -12,7 +12,6 @@ module Scrapers
         ::Scrapers::ScrappedJobDetails.new(
           id: job_link.id,
           title: title,
-          origin_id: job_link.id,
           origin_name: ::Scrapers::RemotiveIo::ORIGIN_NAME,
           company_name: company_name,
           link: filtered_apply_link,
