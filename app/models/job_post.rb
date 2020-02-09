@@ -5,9 +5,9 @@ class JobPost < ApplicationRecord
   belongs_to :company, optional: true
 
   validates :title, presence: true
+  validates :apply_url, presence: true
 
   # TODO: add salary field
-  # TODO: change `link` to `apply_url`
 end
 
 # == Schema Information
@@ -15,9 +15,9 @@ end
 # Table name: job_posts
 #
 #  id                   :bigint           not null, primary key
+#  apply_url            :string
 #  benefits             :text
 #  description          :text
-#  link                 :string
 #  origin_name          :string
 #  publication_datetime :datetime
 #  title                :string
