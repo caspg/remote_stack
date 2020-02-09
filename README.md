@@ -6,7 +6,7 @@
 
 [] make sure to extract and filter apply link from we work remotely jobs (What about emails)
 
-[] create `job_origins` table (StackOverflow, WWR, Remoteive.io etc)
+[*] create `job_origins` table (StackOverflow, WWR, Remoteive.io etc)
 
 [] scrap jobs from remoteok.io (but make sure that filter out jobs from other boards)
 
