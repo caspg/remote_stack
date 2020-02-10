@@ -1,10 +1,10 @@
 module Scrapers
-  class StackOverflowWorker
+  class RemotiveIoWorker
     include Sidekiq::Worker
 
     def perform
       ::Scrapers.run_scraper(
-        scraper_module: StackOverflow,
+        scraper_module: RemotiveIo,
         job_origin_name: JobOrigin::STACK_OVERFLOW,
       )
     end
