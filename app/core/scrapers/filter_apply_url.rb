@@ -16,6 +16,7 @@ module Scrapers
 
     def call
       return nil if apply_url.nil?
+      return nil if last_request_uri.nil?
       return nil if ignored_hostname?
 
       last_request_uri.to_s
@@ -30,11 +31,14 @@ module Scrapers
     end
 
     def last_request_uri
-      response.request.last_uri
+      response&.request&.last_uri
     end
 
     def response
       HTTParty.get(apply_url, follow_redirects: true)
+    rescue HTTParty::RedirectionTooDeep
+      puts "HTTParty::RedirectionTooDeep when fetching: #{apply_url}"
+      nil
     end
   end
 end
