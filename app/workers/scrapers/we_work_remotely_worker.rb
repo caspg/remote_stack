@@ -2,6 +2,8 @@ module Scrapers
   class WeWorkRemotelyWorker
     include Sidekiq::Worker
 
+    sidekiq_options retry: 0
+
     def perform
       ::Scrapers.run_scraper(
         scraper_module: WeWorkRemotely,
