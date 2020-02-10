@@ -5,6 +5,7 @@
 [*] rename job_posts.link to job_posts.apply_url
 
 [] make sure to extract and filter apply link from we work remotely jobs (What about emails)
+[] do not use rss feed in WWR and just scrap links from website
 
 [*] create `job_origins` table (StackOverflow, WWR, Remoteive.io etc)
 
