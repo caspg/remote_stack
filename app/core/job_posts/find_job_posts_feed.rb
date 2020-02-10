@@ -6,7 +6,7 @@ module JobPosts
         .where('publication_datetime > ?', 30.days.ago)
         .order(publication_datetime: :desc)
         .page(page)
-        .per(5)
+        .per(25)
     end
   end
 end
