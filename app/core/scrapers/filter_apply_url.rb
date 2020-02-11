@@ -26,10 +26,11 @@ module Scrapers
 
     def call
       return nil if apply_url.nil?
-      return apply_url if email_uri?(apply_url)
+      return apply_url if email_uri_str?(apply_url)
+      return last_request_uri_str if email_uri_str?(last_request_uri_str)
       return nil if ignored_hostname?
 
-      last_request_uri.to_s
+      last_request_uri_str
     end
 
     private
@@ -38,6 +39,10 @@ module Scrapers
 
     def ignored_hostname?
       IGNORED_HOSTNAMES.include?(last_request_uri.hostname)
+    end
+
+    def last_request_uri_str
+      last_request_uri.to_s
     end
 
     def last_request_uri
@@ -54,7 +59,7 @@ module Scrapers
 
       return apply_uri if uri_str.nil?
       return apply_uri if limit.zero?
-      return uri_str if email_uri?(uri_str)
+      return uri_str if email_uri_str?(uri_str)
 
       current_uri = build_uri(uri_str, prev_uri)
       response = Net::HTTP.get_response(current_uri)
@@ -73,7 +78,7 @@ module Scrapers
       end
     end
 
-    def email_uri?(uri_str)
+    def email_uri_str?(uri_str)
       uri_str.start_with?('mailto:') || uri_str =~ /@/
     end
 
