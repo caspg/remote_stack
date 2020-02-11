@@ -11,6 +11,15 @@
 
 [] scrap jobs from remoteok.io (but make sure that filter out jobs from other boards)
 
+[] make scrapers more fault tolerant:
+  * fetch job links -> reverse them -> loop instead of map -> scrap and save one by one
+  * if job fails, after fix we can just restart it and continue saving newer jobs
+
+
+
+
+FUTURE:
+
 [] try to extract tags from description and title (NLP?)
 
 ## Deployment
