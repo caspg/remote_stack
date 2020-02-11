@@ -1,7 +1,7 @@
 <li class="bg-white container mx-auto mb-2 p-4 border rounded cursor-pointer">
   <div class="flex flex-col">
     <h2 class="font-semibold mb-1 hover:underline">
-      <%= job_post.title %>
+      <%= link_to job_post.title, job_posts_path(job_post) %>
     </h2>
 
     <% if job_post.company.present? %>
