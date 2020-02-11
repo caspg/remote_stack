@@ -15,8 +15,12 @@
   * fetch job links -> reverse them -> loop instead of map -> scrap and save one by one
   * if job fails, after fix we can just restart it and continue saving newer jobs
 
-
-
+[] scrap info about companies
+[] add about page - info about the project and maybe about me?
+[] add "Post a job" page - for now with just email info
+[] add contact page
+[] update footer with site map and contact info
+[] create Twitter and Facebook and LinkedIn?
 
 FUTURE:
 
