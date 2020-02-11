@@ -1,4 +1,41 @@
-<h1>Elo</h1>
-<h2>
-  <%= @job_post.title %>
-</h2>
+<div class="container mx-auto max-w-4xl bg-white p-10 border rounded">
+  <h1 class="font-bold text-2xl">
+    <%= @job_post.title %>
+  </h1>
+
+  <% if @job_post.company.present? %>
+    <p class="flex">
+      <%= image_tag('icons/portfolio.svg', class: 'opacity-75 w-4 mr-2') %>
+      <span>
+        <%= @job_post.company.name %>
+      </span>
+    </p>
+  <% end %>
+
+  <div class="mt-2">
+    <%= render(partial: 'shared/skill_tag', collection: @job_post.skills, as: :skill) %>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to(
+      'Apply Now',
+      @job_post.apply_url,
+      { class: 'btn btn-primary', target: '_blank' }
+    ) %>
+  </div>
+
+  <div class="mt-6 flex justify-between">
+    <span class="flex text-xs">
+      <%= image_tag('icons/time.svg', class: 'opacity-75 w-4 mr-2') %>
+      <%= time_ago_in_words(@job_post.publication_datetime)%>
+    </span>
+
+    <span class="flex text-xs">
+      Found on&nbsp;<strong><%= @job_post.job_origin.name %></strong>
+    </span>
+  </div>
+
+  <div class="border-t mt-8 mb-4 pt-8 job-show__description">
+    <%= sanitize(@job_post.description) %>
+  </div>
+</div>

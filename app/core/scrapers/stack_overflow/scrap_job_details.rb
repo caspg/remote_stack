@@ -10,7 +10,7 @@ module Scrapers
           id: rss_feed_item.id,
           title: title,
           salary: salary,
-          company_name: company_name,
+          company_name: company_name || alternative_company_name,
           benefits: benefits,
         )
       end
@@ -33,6 +33,12 @@ module Scrapers
 
       def company_name
         document.css('header [href^="/jobs/companies/"]')
+                .find { |i| i.content.present? }
+                &.content
+      end
+
+      def alternative_company_name
+        document.css('header .employer')
                 .find { |i| i.content.present? }
                 &.content
       end

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="bg-gray-100">
   <head>
     <title>RemoteStack</title>
     <%= csrf_meta_tags %>
@@ -11,7 +11,11 @@
 
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-100">
+    <%= render('shared/navbar') %>
+
+    <div class="pt-12 pb-12 pl-2 pr-2">
+      <%= yield %>
+    </div>
   </body>
 </html>

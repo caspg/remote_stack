@@ -1,13 +1,7 @@
-<%= render('shared/navbar') %>
+<div class="container mx-auto max-w-3xl">
+  <ul class="mb-4">
+    <%= render(partial: 'job_post_list_item', collection: @job_posts, as: :job_post) %>
+  </ul>
 
-<div class="pt-12 pb-12 pl-2 pr-2 bg-gray-100">
-  <div class="container mx-auto max-w-3xl">
-    <ul class="mb-4">
-      <% @job_posts.each do |job_post| %>
-        <%= render('job_post_list_item', job_post: job_post) %>
-      <% end %>
-    </ul>
-
-    <%= paginate(@job_posts) %>
-  </div>
+  <%= paginate(@job_posts) %>
 </div>
