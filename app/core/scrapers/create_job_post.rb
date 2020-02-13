@@ -30,7 +30,7 @@ module Scrapers
       job_details
         .to_h
         .merge(company: company, origin_id: job_details.id)
-        .except(:company_name, :categories, :salary, :id)
+        .except(:company_name, :categories, :id)
     end
 
     def company
