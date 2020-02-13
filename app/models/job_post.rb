@@ -29,6 +29,7 @@ end
 #  apply_url            :string
 #  benefits             :text
 #  description          :text
+#  origin_url           :string
 #  publication_datetime :datetime
 #  salary               :string
 #  title                :string
