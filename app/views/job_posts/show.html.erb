@@ -30,8 +30,14 @@
       <%= time_ago_in_words(@job_post.publication_datetime)%>
     </span>
 
-    <span class="flex text-xs">
-      Found on&nbsp;<strong><%= @job_post.job_origin.name %></strong>
+    <span class="flex text-xs hover:underline">
+      <% if @job_post.origin_url.present? %>
+        <%= link_to @job_post.origin_url, target: '_blank' do %>
+          Found on&nbsp;<strong><%= @job_post.job_origin.name %></strong>
+        <% end %>
+      <% else %>
+        Found on&nbsp;<strong><%= @job_post.job_origin.name %></strong>
+      <% end %>
     </span>
   </div>
 
