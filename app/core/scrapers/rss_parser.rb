@@ -20,14 +20,14 @@ module Scrapers
 
     private
 
-    attr_reader :last_guid
+    attr_reader :last_guid, :limit
 
     def item_id(item)
       item.guid.content
     end
 
     def items
-      return sorted_items.take(liimt) if limit.present?
+      return sorted_items.take(limit) if limit.present?
 
       sorted_items.take_while do |item|
         item_id(item).to_s != last_guid
