@@ -5,8 +5,8 @@ module Scrapers
     class ParseRss < ::Scrapers::RssParser
       RSS_FEED_URL = 'https://stackoverflow.com/jobs/feed?r=true'.freeze
 
-      def initialize(last_origin_id:)
-        super(last_guid: last_origin_id)
+      def initialize(last_origin_id:, limit:)
+        super(last_guid: last_origin_id, limit: limit)
       end
 
       def call

@@ -1,12 +1,13 @@
 module Scrapers
   module WeWorkRemotely
     class << self
-      def scrap_and_create_job_posts(last_origin_id:)
+      def scrap_and_create_job_posts(last_origin_id:, limit: nil)
         ::Scrapers::ScrapRssAndCreateJobPosts.new(
           last_origin_id: last_origin_id,
           rss_parser: ::Scrapers::WeWorkRemotely::ParseRss,
           job_details_scraper: ::Scrapers::WeWorkRemotely::ScrapJobDetails,
           job_origin_id: job_origin_id,
+          limit: limit,
         ).call
       end
 

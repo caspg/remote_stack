@@ -1,7 +1,8 @@
 module Scrapers
   class RssParser
-    def initialize(last_guid:)
+    def initialize(last_guid:, limit:)
       @last_guid = last_guid
+      @limit = limit
     end
 
     def call
@@ -26,6 +27,8 @@ module Scrapers
     end
 
     def items
+      return sorted_items.take(liimt) if limit.present?
+
       sorted_items.take_while do |item|
         item_id(item).to_s != last_guid
       end

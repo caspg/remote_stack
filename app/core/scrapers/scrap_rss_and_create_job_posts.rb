@@ -1,10 +1,11 @@
 module Scrapers
   class ScrapRssAndCreateJobPosts
-    def initialize(last_origin_id:, rss_parser:, job_origin_id:, job_details_scraper:)
+    def initialize(last_origin_id:, rss_parser:, job_origin_id:, job_details_scraper:, limit:)
       @last_origin_id = last_origin_id
       @rss_parser = rss_parser
       @job_origin_id = job_origin_id
       @job_details_scraper = job_details_scraper
+      @limit = limit
     end
 
     def call
@@ -15,10 +16,10 @@ module Scrapers
 
     private
 
-    attr_reader :last_origin_id, :rss_parser, :job_origin_id, :job_details_scraper
+    attr_reader :last_origin_id, :rss_parser, :job_origin_id, :job_details_scraper, :limit
 
     def parse_rss_feed_items
-      rss_parser.new(last_origin_id: last_origin_id).call
+      rss_parser.new(last_origin_id: last_origin_id, limit: limit).call
     end
 
     def scrap_and_prepare_params(rss_feed_item)
