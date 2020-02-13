@@ -12,6 +12,7 @@ module Scrapers
           salary: salary,
           company_name: company_name || alternative_company_name,
           benefits: benefits,
+          apply_url: rss_feed_item.link,
         )
       end
 

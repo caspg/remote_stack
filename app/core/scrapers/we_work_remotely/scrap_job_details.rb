@@ -10,6 +10,7 @@ module Scrapers
           id: rss_feed_item.id,
           title: title,
           company_name: company_name,
+          apply_url: filtered_apply_url || rss_feed_item.link,
         )
       end
 
@@ -27,6 +28,15 @@ module Scrapers
                 .first
                 &.content
                 &.strip
+      end
+
+      def filtered_apply_url
+        @filtered_apply_url ||=
+          ::Scrapers::FilterApplyUrl.new(apply_url: apply_url).call
+      end
+
+      def apply_url
+        document.css('.apply_tooltip a').first&.attribute('href')&.value
       end
     end
   end

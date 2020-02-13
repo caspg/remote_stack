@@ -7,6 +7,7 @@ module Scrapers
     :company_name,
     :benefits,
     :apply_url,
+    :origin_url,
     :publication_datetime,
     :description,
     :categories,

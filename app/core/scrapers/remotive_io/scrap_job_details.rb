@@ -6,7 +6,7 @@ module Scrapers
         @job_origin_id = job_origin_id
       end
 
-      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       def call
         return nil if filtered_apply_url.nil?
 
@@ -16,12 +16,13 @@ module Scrapers
           job_origin_id: job_origin_id,
           company_name: company_name,
           apply_url: filtered_apply_url,
+          origin_url: job_link.url,
           publication_datetime: job_link.publication_datetime || DateTime.now,
           description: description,
           categories: categories,
         )
       end
-      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
       private
 
