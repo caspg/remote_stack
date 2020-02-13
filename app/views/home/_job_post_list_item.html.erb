@@ -6,11 +6,19 @@
         </h2>
       <% end %>
 
-    <% if job_post.company.present? %>
-      <p>
-        <%= job_post.company.name %>
-      </p>
-    <% end %>
+    <div>
+      <% if job_post.company.present? %>
+        <span>
+          <%= job_post.company.name %>
+        </span>
+      <% end %>
+
+      <% if job_post.salary.present? %>
+        <span class="text-green-600 ml-4 text-sm">
+          <%= job_post.salary %>
+        </span>
+      <% end %>
+    </div>
 
     <div class="mt-2">
       <%= render(partial: 'shared/skill_tag', collection: job_post.skills, as: :skill) %>
