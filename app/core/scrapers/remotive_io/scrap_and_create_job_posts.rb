@@ -8,10 +8,12 @@ module Scrapers
       end
 
       def call
-        job_links
-          .map { |job_link| scrap_job_details(job_link) }
-          .filter(&:present?)
-          .map { |job_details| create_job_post(job_details) }
+        job_links.each do |job_link|
+          job_details = scrap_job_details(job_link)
+          next if job_details.nil?
+
+          create_job_post(job_details)
+        end
       end
 
       private

@@ -9,9 +9,10 @@ module Scrapers
     end
 
     def call
-      parse_rss_feed_items
-        .map { |rss_feed_item| scrap_and_prepare_params(rss_feed_item) }
-        .map { |data| create_job_post(data) }
+      parse_rss_feed_items.each do |rss_feed_item|
+        job_post_details = scrap_and_prepare_params(rss_feed_item)
+        create_job_post(job_post_details)
+      end
     end
 
     private
