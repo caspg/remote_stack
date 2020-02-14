@@ -1,6 +1,31 @@
 <div class="container mx-auto max-w-3xl">
+  <div class="mb-8">
+    <%= form_tag root_path, method: :get do %>
+      <div class="flex flex-col md:flex-row">
+        <%= text_field_tag(
+          :query,
+          params[:query],
+          class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="[email protected]',
+          placeholder: 'job content, skill, title...'
+        ) %>
+
+        <%= button_tag type: 'submit', class: 'mt-2 md:mt-0 md:ml-2 btn btn-primary flex items-center justify-center' do %>
+          <%= image_tag('icons/search-white.svg', class: 'w-4 mr-2') %>
+          <span>Search</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
   <ul class="mb-4">
-    <%= render(partial: 'job_post_list_item', collection: @job_posts, as: :job_post) %>
+    <% if @job_posts.present? %>
+      <%= render(partial: 'job_post_list_item', collection: @job_posts, as: :job_post) %>
+    <% else %>
+      <div class="flex flex-col items-center">
+        <p>No results found. Maybe try searching for something else.</p>
+        <%= link_to "Clear search", root_path, class: "mt-6 btn btn-secondary" %>
+      </div>
+    <% end %>
   </ul>
 
   <%= paginate(@job_posts) %>

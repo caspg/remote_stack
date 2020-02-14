@@ -6,7 +6,7 @@
         </h2>
       <% end %>
 
-    <div>
+    <div class="flex items-baseline flex-col md:flex-row">
       <% if job_post.company.present? %>
         <span>
           <%= job_post.company.name %>
@@ -14,7 +14,7 @@
       <% end %>
 
       <% if job_post.salary.present? %>
-        <span class="text-green-600 ml-4 text-sm">
+        <span class="text-green-600 md:ml-4 text-sm">
           <%= job_post.salary %>
         </span>
       <% end %>
