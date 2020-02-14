@@ -9,6 +9,17 @@ class JobPost < ApplicationRecord
   validates :apply_url, presence: true
 
   class << self
+    def text_search(query)
+      if query.present?
+        where(
+          'title @@ :query OR description @@ :query',
+          query: query,
+        )
+      else
+        all
+      end
+    end
+
     def most_recent
       order('publication_datetime').last
     end

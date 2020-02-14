@@ -6,6 +6,6 @@ class HomeController < ApplicationController
   private
 
   def job_posts_feed
-    ::JobPosts::FindJobPostsFeed.call(page: params[:page])
+    ::JobPosts::FindJobPostsFeed.call(page: params[:page], query: params[:query])
   end
 end
