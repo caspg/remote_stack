@@ -13,12 +13,12 @@
 
   </head>
 
-  <body class="bg-gray-100">
+  <body class="bg-gray-100 flex flex-col min-h-screen">
     <%= render('shared/navbar') %>
 
-    <div class="pt-12 pb-12 pl-2 pr-2">
+    <main class="pt-12 pb-12 pl-2 pr-2 flex-1">
       <%= yield %>
-    </div>
+    </main>
 
     <%= render('shared/footer') %>
   </body>
