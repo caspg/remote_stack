@@ -96,7 +96,7 @@ module Scrapers
 
       return uri if uri.hostname.present?
 
-      URI::HTTPS.build(host: prev_uri.hostname, path: uri.to_s)
+      URI::HTTPS.build(host: prev_uri.hostname, path: uri.path, query: uri.query)
     end
   end
 end
