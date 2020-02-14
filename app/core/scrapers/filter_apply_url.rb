@@ -19,8 +19,6 @@ module Scrapers
     ].freeze
 
     def initialize(apply_url:)
-      Rails.logger.info("apply_url: #{apply_url}")
-
       @apply_url = apply_url
     end
 
@@ -50,10 +48,11 @@ module Scrapers
     end
 
     def apply_uri
-      URI(apply_url)
+      @apply_uri ||= URI(apply_url)
     end
 
     # https://ruby-doc.org/stdlib-2.7.0/libdoc/net/http/rdoc/Net/HTTP.html#class-Net::HTTP-label-Following+Redirection
+    # rubocop:disable Metrics/MethodLength
     def fetch_last_request_uri(uri_str, limit = 5, prev_uri = nil)
       Rails.logger.info("uri_str: #{uri_str}")
 
@@ -62,11 +61,20 @@ module Scrapers
       return uri_str if email_uri_str?(uri_str)
 
       current_uri = build_uri(uri_str, prev_uri)
-      response = Net::HTTP.get_response(current_uri)
-      handle_get_response(response, limit, current_uri, prev_uri)
-    end
 
-    def handle_get_response(http_response, limit, current_uri, prev_uri)
+      begin
+        response = Net::HTTP.get_response(current_uri)
+        handle_get_response(response, limit, current_uri)
+      # TODO: lol below. maybe move to farady?
+      rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+             Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError,
+             OpenSSL::SSL::SSLError
+        apply_uri
+      end
+    end
+    # rubocop:enable Metrics/MethodLength
+
+    def handle_get_response(http_response, limit, current_uri)
       case http_response
       when Net::HTTPSuccess
         http_response.uri
@@ -74,7 +82,7 @@ module Scrapers
         location = http_response['location']
         fetch_last_request_uri(location, limit - 1, current_uri)
       else
-        prev_uri || apply_uri
+        apply_uri
       end
     end
 
