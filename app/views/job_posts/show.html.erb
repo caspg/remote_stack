@@ -1,22 +1,24 @@
-<div class="container mx-auto max-w-4xl bg-white p-10 border rounded">
+<div class="md:container md:max-w-4xl md:mx-auto md:mt-12 mb-12 p-4 md:p-10 bg-white md:border md:rounded">
   <h1 class="font-bold text-2xl">
     <%= @job_post.title %>
   </h1>
 
-  <% if @job_post.company.present? %>
-    <p class="flex">
-      <%= image_tag('icons/portfolio.svg', class: 'opacity-75 w-4 mr-2') %>
-      <span>
-        <%= @job_post.company.name %>
-      </span>
+  <div class="flex md:items-end flex-col md:flex-row">
+    <% if @job_post.company.present? %>
+        <p class="flex">
+          <%= image_tag('icons/portfolio.svg', class: 'opacity-75 w-4 mr-2') %>
+          <span class="md:mr-4">
+            <%= @job_post.company.name %>
+          </span>
+        </p>
+    <% end %>
 
-      <% if @job_post.salary.present? %>
-        <span class="text-green-600 ml-4 text-sm">
-          <%= @job_post.salary %>
-        </span>
-      <% end %>
-    </p>
-  <% end %>
+    <% if @job_post.salary.present? %>
+      <span class="text-green-600 text-sm">
+        <%= @job_post.salary %>
+      </span>
+    <% end %>
+  </div>
 
   <div class="mt-2">
     <%= render(partial: 'shared/skill_tag', collection: @job_post.skills, as: :skill) %>

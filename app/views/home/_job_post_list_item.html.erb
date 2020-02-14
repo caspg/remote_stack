@@ -8,13 +8,13 @@
 
     <div class="flex items-baseline flex-col md:flex-row">
       <% if job_post.company.present? %>
-        <span>
+        <span class="md:mr-4">
           <%= job_post.company.name %>
         </span>
       <% end %>
 
       <% if job_post.salary.present? %>
-        <span class="text-green-600 md:ml-4 text-sm">
+        <span class="text-green-600 text-sm">
           <%= job_post.salary %>
         </span>
       <% end %>
@@ -25,7 +25,7 @@
     </div>
 
     <p class="flex text-xs mt-1 self-end">
-      <%= image_tag('icons/time.svg', class: 'opacity-75 w-4 mr-2') %>
+      <%= image_tag('icons/time.svg', class: 'opacity-75 w-3 md:w-4 mr-2') %>
       <%= time_ago_in_words(job_post.publication_datetime) %>
     </p>
   </div>
