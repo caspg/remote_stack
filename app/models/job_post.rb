@@ -8,13 +8,17 @@ class JobPost < ApplicationRecord
   validates :title, presence: true
   validates :apply_url, presence: true
 
+  include PgSearch::Model
+  pg_search_scope(
+    :search,
+    against: %i[title description],
+    associated_against: { skills: :name, company: :name },
+  )
+
   class << self
     def text_search(query)
       if query.present?
-        where(
-          "to_tsvector('english', title) @@ plainto_tsquery('english', :query) OR to_tsvector('english', description) @@ plainto_tsquery('english', :query)",
-          query: query,
-        )
+        search(query)
       else
         all
       end
