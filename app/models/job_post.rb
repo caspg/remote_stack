@@ -12,7 +12,7 @@ class JobPost < ApplicationRecord
     def text_search(query)
       if query.present?
         where(
-          'title @@ :query OR description @@ :query',
+          "to_tsvector('english', title) @@ plainto_tsquery('english', :query) OR to_tsvector('english', description) @@ plainto_tsquery('english', :query)",
           query: query,
         )
       else
