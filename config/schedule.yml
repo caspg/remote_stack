@@ -3,12 +3,12 @@ stack_overflow_scraper:
   cron: "0 0 * * *"
   class: "StackOverflowWorker"
 
-# # At 00:30
-# we_work_remotely_scraper:
-#   cron: "30 0 * * *"
-#   class: "WeWorkRemotelyWorker"
+# At 00:30
+we_work_remotely_scraper:
+  cron: "30 0 * * *"
+  class: "WeWorkRemotelyWorker"
 
-# # At 01:00
-# remoteive_io_scraper:
-#   cron: "0 1 * * *"
-#   class: "RemotiveIoWorker"
+# At 01:00
+remoteive_io_scraper:
+  cron: "0 1 * * *"
+  class: "RemotiveIoWorker"
