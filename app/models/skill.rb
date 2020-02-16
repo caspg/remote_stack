@@ -1,5 +1,5 @@
 class Skill < ApplicationRecord
-  has_many :job_post_skills
+  has_many :job_post_skills, dependent: :destroy
   has_many :job_posts, through: :job_post_skills
 
   validates :name, presence: true
