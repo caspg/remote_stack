@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2020_02_16_172711) do
        JOIN skills ON ((skills.id = job_post_skills.skill_id)))
     GROUP BY job_posts.id, companies.id;
   SQL
+  add_index "job_post_searches", ["job_post_id"], name: "index_job_post_searches_on_job_post_id", unique: true
   add_index "job_post_searches", ["tsv_document"], name: "index_job_post_searches_on_tsv_document", using: :gin
 
 end
