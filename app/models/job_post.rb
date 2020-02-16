@@ -23,7 +23,7 @@ class JobPost < ApplicationRecord
   class << self
     def text_search(query)
       if query.present?
-        where(id: JobPostSearch.search(query).pluck(:job_post_id))
+        where(id: JobPostSearch.search(query).select(:job_post_id))
       else
         all
       end
