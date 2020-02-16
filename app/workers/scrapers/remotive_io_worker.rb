@@ -7,7 +7,7 @@ module Scrapers
     def perform
       ::Scrapers.run_scraper(
         scraper_module: RemotiveIo,
-        job_origin_name: JobOrigin::STACK_OVERFLOW,
+        job_origin_name: JobOrigin::REMOTEIVE_IO,
       )
     end
   end
