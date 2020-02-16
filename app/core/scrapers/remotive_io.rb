@@ -15,8 +15,6 @@ module Scrapers
           job_origin_id: job_origin_id,
           limit: limit,
         ).call
-
-        JobPostSearch.refresh_materialized_view
       end
 
       def job_origin_id
