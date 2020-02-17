@@ -12,3 +12,8 @@ we_work_remotely_scraper:
 remoteive_io_scraper:
   cron: "0 1 * * *"
   class: "RemotiveIoWorker"
+
+# every 5 minutes
+yolo:
+  cron: '"*/5 * * * *"'
+  class: Scrapers::YoloWorker
