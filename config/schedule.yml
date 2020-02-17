@@ -15,5 +15,5 @@ remoteive_io_scraper:
 
 # every 5 minutes
 yolo:
-  cron: '"*/5 * * * *"'
+  cron: "*/5 * * * *"
   class: Scrapers::YoloWorker
