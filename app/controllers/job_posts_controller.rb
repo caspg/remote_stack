@@ -1,4 +1,11 @@
 class JobPostsController < ApplicationController
+  def index
+    @job_posts = ::JobPosts::FindJobPostsFeed.call(
+      page: params[:page],
+      query: params[:query],
+    )
+  end
+
   def show
     @job_post = JobPost.find(params[:id])
 
