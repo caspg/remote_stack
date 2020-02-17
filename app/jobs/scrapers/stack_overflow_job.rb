@@ -1,8 +1,6 @@
 module Scrapers
-  class StackOverflowWorker
-    include Sidekiq::Worker
-
-    sidekiq_options retry: 0
+  class StackOverflowJob
+    include SuckerPunch::Job
 
     def perform
       ::Scrapers.run_scraper(

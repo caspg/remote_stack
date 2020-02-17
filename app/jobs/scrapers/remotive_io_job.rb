@@ -1,8 +1,6 @@
 module Scrapers
-  class RemotiveIoWorker
-    include Sidekiq::Worker
-
-    sidekiq_options retry: 0
+  class RemotiveIoJob
+    include SuckerPunch::Job
 
     def perform
       ::Scrapers.run_scraper(
