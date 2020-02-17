@@ -61,8 +61,9 @@ end
 #
 # Indexes
 #
-#  index_job_posts_on_company_id     (company_id)
-#  index_job_posts_on_job_origin_id  (job_origin_id)
+#  index_job_posts_on_company_id            (company_id)
+#  index_job_posts_on_job_origin_id         (job_origin_id)
+#  index_job_posts_on_publication_datetime  (publication_datetime)
 #
 # Foreign Keys
 #
