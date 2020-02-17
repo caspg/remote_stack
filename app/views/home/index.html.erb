@@ -19,7 +19,7 @@
 
   <ul class="mb-4">
     <% if @job_posts.present? %>
-      <%= render(partial: 'job_post_list_item', collection: @job_posts, as: :job_post) %>
+      <%= render(partial: 'job_post_list_item', collection: @job_posts, as: :job_post, cached: true) %>
     <% else %>
       <div class="flex flex-col items-center">
         <p>No results found. Maybe try searching for something else.</p>
