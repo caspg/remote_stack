@@ -8,13 +8,13 @@ end
 task scrap_we_work_remotely: :environment do
   ::Scrapers.run_scraper(
     scraper_module: ::Scrapers::WeWorkRemotely,
-    job_origin_name: Scrapers::JobOrigin::WE_WORK_REMOTELY,
+    job_origin_name: ::JobOrigin::WE_WORK_REMOTELY,
   )
 end
 
 task scrap_remotive: :environment do
   ::Scrapers.run_scraper(
     scraper_module: ::Scrapers::RemotiveIo,
-    job_origin_name: JobOrigin::REMOTEIVE_IO,
+    job_origin_name: ::JobOrigin::REMOTEIVE_IO,
   )
 end
