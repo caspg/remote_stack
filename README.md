@@ -22,6 +22,8 @@
 [] update footer with site map and contact info
 [] create Twitter and Facebook and LinkedIn?
 
+[] Add timestamps to company!
+
 FUTURE:
 
 [] try to extract tags from description and title (NLP?)
