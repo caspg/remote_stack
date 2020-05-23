@@ -180,7 +180,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.3)
-    puma (4.3.1)
+    puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.1.2)
     rack-proxy (0.6.5)
@@ -332,7 +332,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pg_search (~> 2.3)
   pry
-  puma (~> 4.1)
+  puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.1)
   rubocop (~> 0.79.0)
   sass-rails (>= 6)
