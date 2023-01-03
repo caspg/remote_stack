@@ -59,7 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'activeadmin', '~> 2.6'
 gem 'devise', '~> 4.7'
-gem 'httparty', '~>  0.17'
+gem 'httparty', '~> 0.21'
 gem 'sucker_punch', '~> 2.0'
 gem 'kaminari', '~> 1.1'
 gem 'pg_search', '~> 2.3'
